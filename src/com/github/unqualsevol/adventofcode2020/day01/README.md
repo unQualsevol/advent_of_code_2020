@@ -25,8 +25,6 @@ In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying the
 
 Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
 
-Your puzzle answer was 988771.
-
 The first half of this puzzle is complete! It provides one gold star: *
 --- Part Two ---
 

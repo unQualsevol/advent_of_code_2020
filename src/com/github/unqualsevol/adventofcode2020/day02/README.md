@@ -20,8 +20,6 @@ In the above example, 2 passwords are valid. The middle password, cdefg, is not;
 
 How many passwords are valid according to their policies?
 
-Your puzzle answer was 550.
-
 The first half of this puzzle is complete! It provides one gold star: *
 --- Part Two ---
 

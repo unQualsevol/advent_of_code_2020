@@ -1,5 +1,4 @@
 import java.io.File
-import java.lang.Exception
 
 val preambleSize = 25
 val values = File("../input").readLines().map { it.toLong() }

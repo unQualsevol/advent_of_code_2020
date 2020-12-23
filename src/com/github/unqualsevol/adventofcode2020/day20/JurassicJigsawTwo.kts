@@ -119,7 +119,7 @@ fun findMonsters(map: List<String>) {
         }
     }
     if (monsterCount > 0) {
-        println("'#' that are not part of a sea monster: ${currentMap.map { it.count { it == '#' } }.sum()}")
+        println("'#' that are not part of a sea monster: ${currentMap.map { line -> line.count { it == '#' } }.sum()}")
     }
 }
 

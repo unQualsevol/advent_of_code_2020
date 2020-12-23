@@ -10,29 +10,27 @@ data class Rule(val name: String, val firstRange: IntRange, val secondRange: Int
     }
 }
 
-var index = 0
-
 val rules = input.subList(0, input.indexOfFirst { it == "" }).map {
     val (field, firstFrom, firstTo, secondFrom, secondTo) = regexRules.find(it)!!.destructured
     Rule(field, firstFrom.toInt()..firstTo.toInt(), secondFrom.toInt()..secondTo.toInt())
 }
 
-val myTicket = input.get(input.indexOfLast { it == "" } - 1).split(",").map { it.toInt() }
+val myTicket = input[input.indexOfLast { it == "" } - 1].split(",").map { it.toInt() }
 
-val nearbyTickets = input.subList(input.indexOfLast { it == "" } + 2, input.size).map {
-    it.split(",").map { it.toInt() }
+val nearbyTickets = input.subList(input.indexOfLast { it == "" } + 2, input.size).map { line ->
+    line.split(",").map { it.toInt() }
 }
 
 val validNearbyTickets = nearbyTickets.filter { ticket ->
     ticket.map { field ->
-        if (rules.map { it.valid(field) }.count { it == true } > 0) 0 else field
+        if (rules.any { it.valid(field) }) 0 else field
     }.sum() == 0
 }
 
 val rulesToIndexes = rules.map { rule ->
-    var indexes = mutableListOf<Int>()
-    for (i in 0 until myTicket.size) {
-        if (validNearbyTickets.map { ticket -> rule.valid(ticket[i]) }.count { it == false } == 0) {
+    val indexes = mutableListOf<Int>()
+    for (i in myTicket.indices) {
+        if (validNearbyTickets.all { ticket -> rule.valid(ticket[i]) }) {
             indexes.add(i)
         }
     }

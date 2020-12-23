@@ -3,9 +3,9 @@ import java.io.File
 data class QuantifiedColor(val quantity: Int, val name: String)
 
 val bagToInsideBagMap = mutableMapOf<String, MutableList<QuantifiedColor>>()
-File("input").forEachLine {
+File("input").forEachLine { line ->
     val regex = """^(\w+\s\w+) bags contain (.*)\.$""".toRegex()
-    val matchResult = regex.find(it)
+    val matchResult = regex.find(line)
     val (currentBag, listOfBags) = matchResult!!.destructured
     val regexContent = """((\d+)\s(\w+\s\w+)\sbags?)+""".toRegex()
     val matchResult2 = regexContent.findAll(listOfBags)
@@ -22,7 +22,7 @@ File("input").forEachLine {
 val startKey = "shiny gold"
 fun calculateNumberOfInnerBags(bag: String, map: Map<String, List<QuantifiedColor>>): Int{
     var innerBagCount = 1
-    val innerBags = map.get(bag)!!
+    val innerBags = map.getValue(bag)
     if(innerBags.isEmpty())
         return 1
     for (currentBag in innerBags) {

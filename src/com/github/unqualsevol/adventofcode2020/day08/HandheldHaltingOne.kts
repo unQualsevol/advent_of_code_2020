@@ -3,14 +3,14 @@ import java.lang.Exception
 
 var currentPos = 0
 var accumulator = 0
-val readedInstructions = mutableSetOf(0)
-val program = File("input").readLines();
+val readInstructions = mutableSetOf(0)
+val program = File("input").readLines()
 
 do {
-    val (posOffset, acumulateOffset) = readInstruction(currentPos)
+    val (posOffset, accumulateOffset) = readInstruction(currentPos)
     currentPos += posOffset
-    accumulator += acumulateOffset
-} while (readedInstructions.add(currentPos))
+    accumulator += accumulateOffset
+} while (readInstructions.add(currentPos))
 println("the accumulator is: $accumulator")
 
 fun readInstruction(position: Int): Pair<Int, Int> {

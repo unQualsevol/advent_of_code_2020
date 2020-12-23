@@ -1,7 +1,7 @@
 import java.io.File
 
-var sum = 0;
-var currentBlock = mutableSetOf<Char>();
+var sum = 0
+var currentBlock = mutableSetOf<Char>()
 var innerRow = 0
 File("input").forEachLine {
     val currentLine = it

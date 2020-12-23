@@ -4,11 +4,11 @@ fun countQuestions(data: String): Int {
     val setOfQuestions = mutableSetOf<Char>()
     data.forEach { setOfQuestions.add(it) }
 
-    return setOfQuestions.size;
+    return setOfQuestions.size
 }
 
-var sum = 0;
-var currentBlock = "";
+var sum = 0
+var currentBlock = ""
 File("input").forEachLine {
     val currentLine = it
     if (currentLine.isBlank()) {

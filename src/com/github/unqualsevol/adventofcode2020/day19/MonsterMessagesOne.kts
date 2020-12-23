@@ -26,7 +26,7 @@ fun resolve(ruleId: String, memo: MutableMap<String, List<String>>): List<String
         return value
     }
 
-    val result = rulesMap[ruleId]!!.map { options ->
+    val result = rulesMap.getValue(ruleId).map { options ->
         options.map { partialRegex -> resolve(partialRegex, memo) }.reduce { acc, list ->
             acc.map { item -> list.map { item + it } }.flatten()
         }

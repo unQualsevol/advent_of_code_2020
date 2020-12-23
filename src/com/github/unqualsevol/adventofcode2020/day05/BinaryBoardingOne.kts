@@ -6,8 +6,7 @@ fun computeSeatId(seat: String): Int {
     val rowFactor = 8
     val row = toNumber(seat.substring(0..6), "F", "B")
     val column = toNumber(seat.substring(7..9), "L", "R")
-    val seatId = row * rowFactor + column
-    return seatId
+    return row * rowFactor + column
 }
 
 fun toNumber(passportData: String, zero: String, one: String): Int {
@@ -15,7 +14,7 @@ fun toNumber(passportData: String, zero: String, one: String): Int {
     return replace.toInt(2)
 }
 
-var maxSeatId = 0;
+var maxSeatId = 0
 File("input").forEachLine {
     maxSeatId = max(maxSeatId, computeSeatId(it))
 }

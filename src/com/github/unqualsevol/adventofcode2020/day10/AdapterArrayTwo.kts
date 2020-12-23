@@ -1,6 +1,5 @@
 import java.io.File
 
-val preambleSize = 25
 val joltageRatings = File("input").readLines().map { it.toInt() }.sorted().toMutableList()
 joltageRatings.add(0, 0)
 joltageRatings.add(joltageRatings.max()!! + 3)
@@ -11,7 +10,7 @@ println("possible paths $pathCount")
 fun combination(joltageRatings: List<Int>, combinationMemo: MutableMap<String, Long> = mutableMapOf()): Long {
     val key = joltageRatings.joinToString()
     if (combinationMemo.containsKey(key)) {
-        return combinationMemo.get(key)!!
+        return combinationMemo[key]!!
     }
 
     var result = 1L
@@ -25,6 +24,6 @@ fun combination(joltageRatings: List<Int>, combinationMemo: MutableMap<String, L
             result += combination(mutableListOf, combinationMemo)
         }
     }
-    combinationMemo.put(key, result)
+    combinationMemo[key] = result
     return result
 }

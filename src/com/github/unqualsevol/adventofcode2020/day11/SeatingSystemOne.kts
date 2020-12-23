@@ -8,18 +8,18 @@ var map = File("input").readLines()
 var count = 0
 do {
     println("Round ${++count}")
-    val oldMap = map;
+    val oldMap = map
     val newMap = runSeatRound(map)
     map = newMap
-} while (!oldMap.equals(newMap))
-println("occupied seats: ${map.map { it.count { it == occupied } }.sum()}")
+} while (oldMap != newMap)
+println("occupied seats: ${map.map { line -> line.count { it == occupied } }.sum()}")
 
 
 fun runSeatRound(map:List<String>): List<String> {
     val newMap = mutableListOf<String>()
     for (i in map.indices) {
         val currentRow = map[i]
-        var newRow = StringBuilder()
+        val newRow = StringBuilder()
         for (j in currentRow.indices) {
             val currentCell = currentRow[j]
             if (currentCell == ground) {
@@ -58,7 +58,7 @@ fun calculateAdjacentEmptySeats(seatMap: List<String>, row: Int, column: Int): I
             if (seatMap.indices.contains(currentRow)
                     && seatMap[currentRow].indices.contains(currentColumn)
                     && seatMap[currentRow][currentColumn] == occupied) {
-                emptySeats--;
+                emptySeats--
             }
         }
     }
@@ -75,7 +75,7 @@ fun calculateAdjacentOccupiedSeats(seatMap: List<String>, row: Int, column: Int)
             if (seatMap.indices.contains(currentRow)
                     && seatMap[currentRow].indices.contains(currentColumn)
                     && seatMap[currentRow][currentColumn] == occupied) {
-                occupiedSeats++;
+                occupiedSeats++
             }
         }
     }

@@ -1,12 +1,10 @@
 import java.io.File
-import kotlin.math.max
 
 fun computeSeatId(seat: String): Int {
     val rowFactor = 8
     val row = toNumber(seat.substring(0..6), "F", "B")
     val column = toNumber(seat.substring(7..9), "L", "R")
-    val seatId = row * rowFactor + column
-    return seatId
+    return row * rowFactor + column
 }
 
 fun toNumber(passportData: String, zero: String, one: String): Int {
@@ -14,7 +12,7 @@ fun toNumber(passportData: String, zero: String, one: String): Int {
     return replace.toInt(2)
 }
 
-val seatIds = mutableListOf<Int>();
+val seatIds = mutableListOf<Int>()
 File("input").forEachLine {
     seatIds.add(computeSeatId(it))
 }

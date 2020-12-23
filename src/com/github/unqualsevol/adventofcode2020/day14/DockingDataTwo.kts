@@ -1,15 +1,14 @@
 import java.io.File
 
-val andBaseMask = 68719476735L
 val orBaseMask = 0L
 
-val maskRegex = """([X,0,1]+)""".toRegex()
-val memoryRegex = """mem\[(\d+)\] = (\d+)""".toRegex()
+val maskRegex = """([X01]+)""".toRegex()
+val memoryRegex = """mem\[(\d+)] = (\d+)""".toRegex()
 
 val memory = mutableMapOf<Long, Long>()
-var orMask = 0L;
+var orMask = 0L
 var currentMask = ""
-val input = File("input").forEachLine {
+File("input").forEachLine {
     when {
         it.startsWith("mask") -> updateMask(it)
         it.startsWith("mem") -> updateMemory(it)
@@ -18,13 +17,13 @@ val input = File("input").forEachLine {
 
 println("the sum of all values is: ${memory.values.sum()}")
 
-fun updateMask(line: String): Unit {
+fun updateMask(line: String) {
     val matchResult = maskRegex.find(line)!!
     currentMask = matchResult.value
     orMask = currentMask.replace('X', '0').toLong(2) or orBaseMask
 }
 
-fun updateMemory(line: String): Unit {
+fun updateMemory(line: String) {
     val matchResult = memoryRegex.find(line)!!
     val (adressString, valueString) = matchResult.destructured
     val address = adressString.toLong()

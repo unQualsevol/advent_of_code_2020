@@ -1,7 +1,5 @@
 import java.io.File
-import java.lang.Exception
 
-val preambleSize = 25
 val joltageRatings = File("input").readLines().map { it.toInt() }.sorted().toMutableList()
 joltageRatings.add(0,0)
 joltageRatings.add(joltageRatings.max()!!+3)

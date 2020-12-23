@@ -3,37 +3,37 @@ import java.lang.Exception
 
 var currentPos = 0
 var accumulator = 0
-var readedInstructions = mutableSetOf(0)
-val program = File("input").readLines().toMutableList();
+var readInstructions = mutableSetOf(0)
+val program = File("input").readLines().toMutableList()
 
 //find the loop
 do {
-    val (posOffset, acumulateOffset) = readInstruction(currentPos)
+    val (posOffset, accumulateOffset) = readInstruction(currentPos)
     currentPos += posOffset
-    accumulator += acumulateOffset
-} while (readedInstructions.add(currentPos))
-val loop = readedInstructions.drop(readedInstructions.indexOf(currentPos));
+    accumulator += accumulateOffset
+} while (readInstructions.add(currentPos))
+val loop = readInstructions.drop(readInstructions.indexOf(currentPos))
 val nopOrJmpInstructions = loop.filter { program[it].matches("""^(nop|jmp).*$""".toRegex()) }
 
 //run the program swapping one instruction at a time
-for(swippedInstruction in nopOrJmpInstructions) {
-    val oldInstruction = program[swippedInstruction]
-    program[swippedInstruction] = swapInstruction(oldInstruction)
+for(swipedInstruction in nopOrJmpInstructions) {
+    val oldInstruction = program[swipedInstruction]
+    program[swipedInstruction] = swapInstruction(oldInstruction)
     currentPos = 0
     accumulator = 0
-    readedInstructions = mutableSetOf(0)
+    readInstructions = mutableSetOf(0)
     do {
 
-        val (posOffset, acumulateOffset) = readInstruction(currentPos)
+        val (posOffset, accumulateOffset) = readInstruction(currentPos)
         currentPos += posOffset
-        accumulator += acumulateOffset
-    } while (currentPos < program.size && readedInstructions.add(currentPos))
+        accumulator += accumulateOffset
+    } while (currentPos < program.size && readInstructions.add(currentPos))
     if(currentPos == program.size)
     {
-        println("swapped instruction: $swippedInstruction $oldInstruction")
-        break;
+        println("swapped instruction: $swipedInstruction $oldInstruction")
+        break
     }
-    program[swippedInstruction] = oldInstruction
+    program[swipedInstruction] = oldInstruction
 }
 println("the accumulator is: $accumulator")
 

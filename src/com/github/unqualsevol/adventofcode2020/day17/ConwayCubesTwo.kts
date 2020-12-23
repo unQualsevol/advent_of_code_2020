@@ -40,7 +40,7 @@ fun getCountActiveAdjacent(cube: Coordinate, previousState: Map<Coordinate, Char
                         continue
                     }
                     val orDefault = previousState.getOrDefault(Coordinate(cube.x - x, cube.y - y, cube.z - z, cube.w - w), inactive)
-                    if (orDefault == active) count++;
+                    if (orDefault == active) count++
 
                 }
             }

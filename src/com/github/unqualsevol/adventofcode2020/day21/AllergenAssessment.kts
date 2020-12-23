@@ -9,12 +9,6 @@ val foods = File("input").readLines().map {
 val ingredients = foods.map { it.first }.flatten().toSet()
 val allergens = foods.map { it.second }.flatten().toSet()
 
-val ingredientToFood = ingredients.map { ingredient ->
-    ingredient to
-            foods.filter { it.first.contains(ingredient) }
-}.toMap()
-
-var count = 0
 val allergenToFood = allergens.map { allergen ->
     allergen to foods.filter { food -> food.second.contains(allergen) }.map { food -> food.first.toMutableList() }
 }.toMap()

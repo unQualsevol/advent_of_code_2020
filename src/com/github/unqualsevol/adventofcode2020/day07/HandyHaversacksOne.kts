@@ -1,15 +1,14 @@
 import java.io.File
 
 val bagToParentBagMap = mutableMapOf<String, MutableList<String>>()
-File("input").forEachLine {
+File("input").forEachLine { line ->
     val regex = """^(\w+\s\w+) bags contain (.*)\.$""".toRegex()
-    val matchResult = regex.find(it)
+    val matchResult = regex.find(line)
     val (currentBag, listOfBags) = matchResult!!.destructured
-//    val regexContent = """^((\d)\s(\w+\s\w+)\sbags?)(\,\s((\d)\s(\w+\s\w+))\sbags?)*.$""".toRegex()
     val regexContent = """((\w+\s\w+)\sbags?)+""".toRegex()
     val matchResult2 = regexContent.findAll(listOfBags)
     val childBags = mutableListOf<String>()
-    bagToParentBagMap.getOrPut(currentBag, { mutableListOf() });
+    bagToParentBagMap.getOrPut(currentBag, { mutableListOf() })
     matchResult2.forEach {
         val bag = it.groupValues.last()
         childBags.add(bag)
@@ -20,7 +19,7 @@ val startKey = "shiny gold"
 val queue = mutableListOf(startKey)
 val bagsHavingShinyGold = mutableSetOf<String>()
 do {
-    val currentParents = bagToParentBagMap.get(queue.removeAt(0))
+    val currentParents = bagToParentBagMap[queue.removeAt(0)]
     bagsHavingShinyGold.addAll(currentParents!!)
     queue.addAll(currentParents)
 } while (queue.isNotEmpty())

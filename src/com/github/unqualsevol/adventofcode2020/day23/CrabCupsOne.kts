@@ -21,7 +21,7 @@ for (i in 0 until 100) {
     currentCup = currentCup.right
     //pickup the 3 cups at the right
     val startPickup = currentCup.right
-    var endPickup = startPickup.right.right
+    val endPickup = startPickup.right.right
     //cut off the pickup
     currentCup.right = endPickup.right
     endPickup.right.left = currentCup

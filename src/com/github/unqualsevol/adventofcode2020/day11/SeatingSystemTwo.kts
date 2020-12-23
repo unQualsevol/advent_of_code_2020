@@ -6,18 +6,18 @@ val occupied = '#'
 
 var map = File("input").readLines()
 do {
-    val oldMap = map;
+    val oldMap = map
     val newMap = runSeatRound(map)
     map = newMap
-} while (!oldMap.equals(newMap))
-println("occupied seats: ${map.map { it.count { it == occupied } }.sum()}")
+} while (oldMap != newMap)
+println("occupied seats: ${map.map { line -> line.count { it == occupied } }.sum()}")
 
 
 fun runSeatRound(map: List<String>): List<String> {
     val newMap = mutableListOf<String>()
     for (i in map.indices) {
         val currentRow = map[i]
-        var newRow = StringBuilder()
+        val newRow = StringBuilder()
         for (j in currentRow.indices) {
             val currentCell = currentRow[j]
             newRow.append(

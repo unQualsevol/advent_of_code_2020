@@ -15,7 +15,7 @@ fun resolve(line: String): Long {
     var result = firstOperand.first
     while (index < line.length) {
         val operatorResult = readOperator(line, index)
-        var operator = operatorResult.first
+        val operator = operatorResult.first
         index = operatorResult.second
         result = when (operator) {
             addition -> {
@@ -39,10 +39,9 @@ fun findIndexOfMatchingClosingParentheses(line: String, openParenthesesIndex: In
     var parenthesesCount = 1
     var index = openParenthesesIndex + 1
     while (parenthesesCount > 0) {
-        val current = line[index]
-        when (current) {
-            openParentheses -> parenthesesCount++;
-            closeParentheses -> parenthesesCount--;
+        when (line[index]) {
+            openParentheses -> parenthesesCount++
+            closeParentheses -> parenthesesCount--
             else -> {
             }
         }
@@ -53,8 +52,7 @@ fun findIndexOfMatchingClosingParentheses(line: String, openParenthesesIndex: In
 
 fun readOperand(line: String, start: Int): Pair<Long, Int> {
     var index = start
-    val operandChar = line[index]
-    var result = when (operandChar) {
+    val result = when (val operandChar = line[index]) {
         openParentheses -> {
             val indexOfClosingParentheses = findIndexOfMatchingClosingParentheses(line, index)
             val innerResult = resolve(line.substring(index + 1, indexOfClosingParentheses))
@@ -65,7 +63,7 @@ fun readOperand(line: String, start: Int): Pair<Long, Int> {
             index += 2
             operandChar.toString().toLong()
         }
-        else -> throw IllegalArgumentException("Invalid operand ${operandChar}")
+        else -> throw IllegalArgumentException("Invalid operand $operandChar")
     }
     return Pair(result, index)
 }

@@ -1,12 +1,11 @@
 import java.io.File
-import java.lang.Exception
 
 val preambleSize = 25
 val values = File("input").readLines().map { it.toLong() }
 val preamble = values.subList(0,preambleSize).toMutableList()
 
-var breakingValue = 0L;
-for(i in preambleSize..values.size-preambleSize-1)
+var breakingValue = 0L
+for(i in preambleSize until values.size-preambleSize)
 {
     val currentValue = values[i]
     var found = false
@@ -17,7 +16,7 @@ for(i in preambleSize..values.size-preambleSize-1)
         }
     }
     if(!found) {
-        breakingValue = currentValue;
+        breakingValue = currentValue
         break
     }
     preamble.removeAt(0)
@@ -28,7 +27,7 @@ println("first failing number: $breakingValue")
 var currentPreambleSize = 2
 var found = false
 while (!found){
-    for(i in 0..values.size-currentPreambleSize-1)
+    for(i in 0 until values.size-currentPreambleSize)
     {
         val currentPreamble = values.subList(i, i+currentPreambleSize)
         if (currentPreamble.sum() == breakingValue){
